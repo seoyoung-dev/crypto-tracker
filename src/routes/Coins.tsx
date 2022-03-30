@@ -36,6 +36,11 @@ const Coin = styled.li`
     }
 `;
 
+const Loader = styled.span`
+    text-align: center;
+    display: block;
+`;
+
 const Title = styled.h1`
     font-size: 48px;
     color: ${(props) => props.theme.accentColor};
@@ -45,7 +50,7 @@ const Img = styled.img`
     display: inline;
     width: 25px;
     height: 25px;
-    margin 0 10px 0 30px;
+    margin 0 10px 0 10px;
 `;
 
 interface CoinInterface {
@@ -77,15 +82,12 @@ function Coins() {
             <Header>
                 <Title>코인</Title>
             </Header>
+            {loading ? <Loader>Loading...</Loader> : null}
+
             <CoinsList>
                 {coins.map((coin) => (
                     <Coin key={coin.id}>
-                        <Link
-                            to={{
-                                pathname: `/${coin.id}`,
-                                state: { name: coin.name },
-                            }}
-                        >
+                        <Link to={`/${coin.id}`} state={{ name: coin.name }}>
                             <Img
                                 src={`https://cryptocurrencyliveprices.com/img/${coin.id}.png`}
                             />
